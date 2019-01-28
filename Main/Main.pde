@@ -1,7 +1,8 @@
+int[] size = {700,500};
 Particle myParticle = new Particle();
 
 void setup() {
-  size(400, 400);
+  size(700,500);
 };
 
 

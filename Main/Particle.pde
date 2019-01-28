@@ -5,8 +5,8 @@ class Particle {
 
   Particle() {
     radius = random(25, 50);
-    float x = random(0+radius, 400-radius);
-    float y = random(0+radius, 400-radius);
+    float x = random(0+radius, size[0]-radius);
+    float y = random(0+radius, size[1]-radius);
     pos.Set(x, y);
     vel.Set(random(0.3, 0.6), random(0.3, 0.6), random(3, 4));
     r = random(0, 250);
@@ -16,7 +16,11 @@ class Particle {
 
   void update() {
     pos.apply(vel);
-    if (pos.x-radius<=0 || pos.x+radius>=400){pos.x = pos.x*-1;} else if(pos.y-radius<=0 || pos.y+radius>=400){pos.y = pos.y*-1;}
+    if (pos.x-radius<=0 || pos.x+radius>=size[0]) {
+      vel.x = vel.x*-1;
+    } else if (pos.y-radius<=0 || pos.y+radius>=size[1]) {
+      vel.y = vel.y*-1;
+    }
   }
 
   void paint() {
@@ -27,7 +31,7 @@ class Particle {
     ellipse(pos.x, pos.y, radius/6, radius/6);
   }
   boolean onEdge() {
-    if (pos.x-radius<=0 || pos.x+radius>=400 || pos.y-radius<=0 || pos.y+radius>=400) {
+    if (pos.x-radius<=0 || pos.x+radius>=size[0] || pos.y-radius<=0 || pos.y+radius>=size[1]) {
       return true;
     } else {
       return false;
